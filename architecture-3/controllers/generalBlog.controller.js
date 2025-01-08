@@ -24,7 +24,7 @@ export const postBlog = async (req, res) => {
         }
 
         const newBlog = new GeneralBlog({
-            type: "coding",
+            type: "general",
             name,
             content
         });
