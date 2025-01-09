@@ -2,15 +2,16 @@
   "name": "architecture-3",
   "version": "1.0.0",
   "description": "Microservices Architecture (Analogous) ",
-  "main": "servers/server1.js, servers/server2.js",
+  "main": "servers/server1.js, servers/server2.js, apiGateway.js",
   "scripts": {
-    "start": "concurrently \"node servers/server1.js\" \"node servers/server2.js\"",
-    "dev": "concurrently \"nodemon servers/server1.js\" \"nodemon servers/server2.js\""
+    "start": "concurrently \"node servers/server1.js\" \"node servers/server2.js\" \"node apiGateway.js\"",
+    "dev": "concurrently \"nodemon servers/server1.js\" \"nodemon servers/server2.js\" \"nodemon apiGateway.js\""
   },
   "type": "module",
   "author": "Tamojit Das",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",

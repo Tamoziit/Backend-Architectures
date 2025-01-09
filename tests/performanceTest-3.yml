@@ -1,0 +1,36 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+  - duration: 30
+    arrivalRate: 10
+  - duration: 60
+    arrivalRate: 50
+  - duration: 30
+    arrivalRate: 100
+
+scenarios:
+  - name: "Get Coding Blogs"
+    flow:
+      - get:
+          url: "/api/gateway/blogs/coding"
+  
+  - name: "Get General Blogs"
+    flow:
+      - get:
+          url: "/api/gateway/blogs/general"
+
+  - name: "Post Coding Blogs"
+    flow:
+      - post:
+          url: "/api/gateway/blogs/coding"
+          json:
+            name: "Performance Blog 1"
+            content: "Content for blog 1"
+
+  - name: "Post General Blogs"
+    flow:
+      - post:
+          url: "/api/gateway/blogs/general"
+          json:
+            name: "Performance Blog 2"
+            content: "Content for blog 2"

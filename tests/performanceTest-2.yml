@@ -1,0 +1,36 @@
+config:
+  target: "http://localhost:5000"
+  phases:
+  - duration: 30
+    arrivalRate: 10
+  - duration: 60
+    arrivalRate: 50
+  - duration: 30
+    arrivalRate: 100
+
+scenarios:
+  - name: "Get Coding Blogs"
+    flow:
+      - get:
+          url: "/api/arch2/v1/blogs/get-blogs/coding"
+  
+  - name: "Get General Blogs"
+    flow:
+      - get:
+          url: "/api/arch2/v1/blogs/get-blogs/general"
+
+  - name: "Post Coding Blogs"
+    flow:
+      - post:
+          url: "/api/arch2/v1/blogs/post-blogs/coding"
+          json:
+            name: "Performance Blog 1"
+            content: "Content for blog 1"
+
+  - name: "Post General Blogs"
+    flow:
+      - post:
+          url: "/api/arch2/v1/blogs/post-blogs/general"
+          json:
+            name: "Performance Blog 2"
+            content: "Content for blog 2"
