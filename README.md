@@ -2,13 +2,24 @@
 
 This document compares three architectures based on performance metrics from a load test. The three architectures evaluated are:
 
-1. **Architecture 1: Monolithic**
-2. **Architecture 2: Monolithic with Segregated Databases**
-3. **Architecture 3: Microservices with API Gateway**
+1. **Architecture 1: Monolithic**: In a monolithic architecture, the entire application is developed and deployed as a single unit. All components of the system (like the user interface, business logic, database management, and any other backend services) are tightly coupled and run within a single process. *Here, all CRUD operations are handled by a singleton server, connected to a singular DB*.
+2. **Architecture 2: Monolithic with Segregated Databases**: This architecture is similar to the monolithic architecture, but with a *segregated database layer*. It still operates as a single, tightly-coupled application, but the *database is separated into different sections or services* to manage data for different functionalities more effectively.
+3. **Architecture 3: Microservices with API Gateway**: Microservices architecture is a *decentralized approach* where the application is divided into a set of independent, self-contained services. Each service is designed to handle a specific business functionality and operates autonomously. An *API Gateway* is used to route requests from clients to the appropriate microservices. Here, the architecture consists of *2 servers*, connected to their respective *seperate Databases* to handle 2 different categories of API requests. The requests are *proxied dynamically to their respective servers by an API Gateway*. (NB: This might be a scrapy version of what a true Microservices architecture might be in production; since I reproduced this just from the definition)
 
 ## Overview
 
 Each architecture underwent the same load test with Virtual Users (VUs), and the performance was measured based on various factors such as response time, error rates, HTTP request success rates, and session length.
+**Key Considerations**
+- Databases are empty before running batch tests.
+- Only the required server of the architecture being tested for is running in the background.
+**System Specifications**
+The tests were performed on:
+- *Processor*: AMD Ryzen 7 5700U with Radeon Graphics
+- *Base Speed*: 1.80 GHz
+- *Cores*: 8
+- *Logical Processors*: 16
+- *RAM*: 16.0 GB
+- *GPU*: AMD Radeon(TM) Graphics (Dedicated 2 GB, Shared 6.9 GB)
 
 ## Key Metrics Analyzed
 
@@ -44,7 +55,7 @@ Each architecture underwent the same load test with Virtual Users (VUs), and the
 | - Max                                  | 10002.8                          | 9716.1                                           | 10009.7                                            |
 | **Success Rate**                      | 67.5%                            | 82.7%                                            | 99.8%                                              |
 
-## Concluding Statement
+## Observations & Inference
 
 - **Architecture 1 (Monolithic)** shows the highest error rates, especially with `ECONNREFUSED` (1391) and a relatively high number of failed user sessions (2049). However, it maintains a reasonable request rate of 54 requests per second with a mean response time of 1550.3 ms.
 
