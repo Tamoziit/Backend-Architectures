@@ -1,8 +1,10 @@
+import dotenv from "dotenv"
+dotenv.config();
 import axios from "axios";
 
 // Microservice Endpoints
-const CODING_BLOGS_SERVICE = "http://localhost:8000/api/arch3/v1/blogs";
-const GENERAL_BLOGS_SERVICE = "http://localhost:8001/api/arch3/v1/blogs";
+const CODING_BLOGS_SERVICE = `${process.env.BASE_URL_1}/api/arch3/v1/blogs`;
+const GENERAL_BLOGS_SERVICE = `${process.env.BASE_URL_2}/api/arch3/v1/blogs`;
 
 export const getBlogs = async (req, res) => {
     const { type } = req.params;
@@ -18,7 +20,8 @@ export const getBlogs = async (req, res) => {
             res.status(400).json({ error: "Invalid blog type" });
         }
     } catch (error) {
-        res.status(500).json({ error: "Service unavailable" });
+        console.log("Error in API Gateway", error);
+        res.status(500).json({ error: "Internal Server Error in Gateway" });
     }
 };
 
@@ -37,6 +40,7 @@ export const addBlog = async (req, res) => {
             res.status(400).json({ error: "Invalid blog type" });
         }
     } catch (error) {
-        res.status(500).json({ error: "Service unavailable" });
+        console.log("Error in API Gateway", error);
+        res.status(500).json({ error: "Internal Server Error in Gateway" });
     }
 };
